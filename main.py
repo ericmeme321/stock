@@ -3,7 +3,7 @@ from stock import *
 from buy_sell import *
 from cash import *
 from futures import *
-
+from db import *
 # # get data
 # import pandas_datareader as pdr
 
@@ -68,10 +68,16 @@ if __name__ == '__main__':
 
     if ins == '1':
         Market_Data = Get_Market_Data()
-        Market_Minute_Data = Get_Market_Minute_Data()
+        DBinsert(Market_Data, '0000')
+        # Market_Minute_Data = Get_Market_Minute_Data()
     elif ins == '2':
-        Stock_Name = input('股票代號 : ')
-        Stock_Data = Get_Stock_Data(Stock_Name)
+        # Stock_Name = input('股票代號 : ')
+        Stock_List  = pd.read_csv('stock_name.csv')
+        for Stock_Name in Stock_List:
+            Stock_Data = Get_Stock_Data(Stock_Name)
+            if Stock_Data != None:
+                DBinsert(Stock_Data, Stock_Name)
+                time.sleep(random.randint(5,15))
         # Stock_Minute_Date = Get_Stock_Minute_Data(Stock_Name)
     elif ins == '3':
         Stock_Name = input('股票代號 : ')

@@ -23,16 +23,15 @@ def Get_Stock_sets(Stock_Name,Now_Time):
 
 def Get_Stock_Data(Stock_Name):
     Now_Time = Get_Now_Plus()
-
-    num = 60
     # num = input('資料筆數 : ')
 
-    All_Stock_Data_URL = f'https://www.wantgoo.com/investrue/{Stock_Name}/historical-daily-candlesticks?before={Now_Time}&top={num+1}'
+    All_Stock_Data_URL = f'https://www.wantgoo.com/investrue/{Stock_Name}/historical-daily-candlesticks?before={Now_Time}&top=60'
 
     # Stock_Sets = Get_Stock_sets(Stock_Name, Now_Time)
 
     Stock_Data = crawler(All_Stock_Data_URL)
-
+    if not Stock_Data:
+        return 
     idx = {'日期':[],
                 '漲跌幅':[],
                 '開盤價':[],
@@ -97,8 +96,8 @@ def Get_Stock_Data(Stock_Name):
 def Get_Stock_Minute_Data(Stock_Name):
     # Search_Time = input("日期(例:20210511) : ")
     # Search_Time_Stamp = Get_Search_Time_Stamp(Search_Time)
-    Search_Time_Stamp = Get_Now()
-    Stock_Minute_Data_URL = f'https://www.wantgoo.com/investrue/{Stock_Name}/historical-realtimeprice-tradedate?tradeDate={Search_Time_Stamp}'
+    Search_Time_Stamp = Get_Now_Plus()
+    Stock_Minute_Data_URL = f'https://www.wantgoo.com/investrue/{Stock_Name}/historical-realtimeprice-tradedate?tradeDate={Search_Time_Stamp}&k=MjUwMDMyMzM5MDkzODY3NzIwMDAw'
     Temp_Data = crawler(Stock_Minute_Data_URL)
     Stock_Minute_Data = Temp_Data['data']
 

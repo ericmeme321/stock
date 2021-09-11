@@ -67,8 +67,8 @@ def Get_Market_Data():
 def Get_Market_Minute_Data():
     # Search_Time = input("日期(例:20210511) : ")
     # Search_Time_Stamp = Get_Search_Time_Stamp(Search_Time)
-    Search_Time_Stamp = Get_Now()
-    Market_Minute_Data_URL = f'https://www.wantgoo.com/investrue/0000/historical-realtimeprice-tradedate?tradeDate={Search_Time_Stamp}'
+    Search_Time_Stamp = Get_Now_Plus()
+    Market_Minute_Data_URL = f'https://www.wantgoo.com/investrue/0000/historical-realtimeprice-tradedate?tradeDate={Search_Time_Stamp}&k=MjUwMDMyMzM5MDkzODY3NzIwMDAw'
     
     Temp_Data = crawler(Market_Minute_Data_URL)
     Market_Minute_Data = Temp_Data['data']
