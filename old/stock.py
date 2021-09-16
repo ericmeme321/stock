@@ -30,8 +30,7 @@ def Get_Stock_Data(Stock_Name):
     # Stock_Sets = Get_Stock_sets(Stock_Name, Now_Time)
 
     Stock_Data = crawler(All_Stock_Data_URL)
-    if not Stock_Data:
-        return 
+
     idx = {'日期':[],
                 '漲跌幅':[],
                 '開盤價':[],
@@ -143,7 +142,7 @@ def Get_Stock_Minute_Data(Stock_Name):
 def Get_Stock_information(Stock_Name):
     # Search_Time = input("日期(例:20210511) : ")
     # Search_Time_Stamp = Get_Search_Time_Stamp(Search_Time)
-    Stock_Data_URL = f'https://www.twse.com.tw/pdf/ch/{Stock_Name}_ch.pdf'
+    Stock_Data_URL = f'https://isin.twse.com.tw/isin/single_main.jsp?owncode={Stock_Name}&stockname='
     headers = {'User-Agent': 'Mozilla/5.0'}
     while 1:
         try:
@@ -154,7 +153,7 @@ def Get_Stock_information(Stock_Name):
                 print(res.status_code)
                 print(Stock_Data_URL)
             else:
-                res.encoding = 'utf-8'
+                res.encoding = 'big5'
                 print(res.status_code)
                 Temp_Data = res.text
                 break

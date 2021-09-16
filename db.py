@@ -24,7 +24,7 @@ def DBinsert(stock_data, stock_name):
             # print("目前使用的資料庫：", record)
             stock_name = "tw_" + stock_name
             cursor = connection.cursor()
-            if stock_name not in cursor:
+            if not stock_name in cursor:
                 cursor.execute("CREATE TABLE " + stock_name + " (uid INT(5) AUTO_INCREMENT PRIMARY KEY\
                 ,date VARCHAR(10), open FLOAT(10), close FLOAT(10), high FLOAT(10), low FLOAT(10), vol INT(10)\
                 , rate VARCHAR(10));")

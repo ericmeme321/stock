@@ -1,5 +1,5 @@
-from market import *
-from stock import *
+from stock2 import *
+from market2 import *
 from buy_sell import *
 from cash import *
 from futures import *
@@ -62,37 +62,35 @@ pd.set_option('display.unicode.east_asian_width',True)
 #     return
 
 if __name__ == '__main__':
-    ins = input("(1)加權指數資料查詢\n(2)股票資料查詢\n(3)股票券商分點資料查詢\n\
-(4)股票特定券商分點資料查詢\n(5)特定券商分點資料查詢\n(6)資金流向查詢\n(7)三大法人期貨多空\n\
-(8)pdf測試\n")
+    ins = input("(1)加權指數資料查詢\n(2)股票資料查詢\n(3)資金流向查詢\n\
+(4)三大法人期貨多空\n(5)股票三大法人資料查詢\n")
 
     if ins == '1':
         Market_Data = Get_Market_Data()
-        DBinsert(Market_Data, '0000')
+        # DBinsert(Market_Data, '0000')
         # Market_Minute_Data = Get_Market_Minute_Data()
     elif ins == '2':
-        # Stock_Name = input('股票代號 : ')
-        Stock_List  = pd.read_csv('stock_name.csv')
-        for Stock_Name in Stock_List:
-            Stock_Data = Get_Stock_Data(Stock_Name)
-            if Stock_Data != None:
-                DBinsert(Stock_Data, Stock_Name)
-                time.sleep(random.randint(5,15))
+        Stock_Name = input('股票代號 : ')
+        Stock_Data = Get_TWStock_Data(Stock_Name)
+
+        # Stock_List  = pd.read_csv('stock_name.csv')
+        # flg = False
+        # for i in range(len(Stock_List)):
+        #     try:
+        #         print(Stock_List.iloc[i].values[1])
+        #         if Stock_List.iloc[i].values[1] == 1234:
+        #             flg = True
+        #         if flg:
+        #             Stock_Data = Get_TWStock_Data(Stock_List.iloc[i].values[1])
+        #             DBinsert(Stock_Data, str(Stock_List.iloc[i].values[1]))
+        #             time.sleep(random.randint(5,15))
+        #     except Exception:
+        #         pass
         # Stock_Minute_Date = Get_Stock_Minute_Data(Stock_Name)
     elif ins == '3':
-        Stock_Name = input('股票代號 : ')
-        Branch_Buy_Sell_Data = Get_Branch_Buy_Sell_Data(Stock_Name)
-    elif ins == '4':
-        Stock_Name = input('股票代號 : ')
-        Agent_ID = input('券商編號 : ')
-        Specific_Branch_Buy_Sell_Data = Get_Specific_Brach_Buy_Sell_Data(Stock_Name, Agent_ID)
-    elif ins == '5':
-        Agent_ID = input('券商編號 : ')
-        Broker_Buy_Sell_Rank_Data = Get_Broker_Buy_Sell_Rank_Data(Agent_ID)
-    elif ins == '6':
         Cash_Flow_Data = Get_Cash_Flow()
-    elif ins == '7':
+    elif ins == '4':
         Futures_Date = Get_Futures()
-    elif ins == '8':
+    elif ins == '5':
         Stock_Name = input('股票代號 : ')
-        Get_Stock_information(Stock_Name)
+        LegalPerson_Data = Get_Stock_LegalPerson(Stock_Name)

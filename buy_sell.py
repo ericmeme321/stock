@@ -64,7 +64,7 @@ def Get_Branch_Buy_Sell_Data(Stock_Name):
     # End_Date = input("結束時間(例:20210701) : ")
     Begin_Date = "2021/07/14"
     End_Date = "2021/07/14"
-    Branch_Buy_Sell_Data_URL = f'https://www.wantgoo.com/stock/{Stock_Name}/major-investors/branch-buysell-data?isOverBuy=true&endDate={End_Date}&beginDate={Begin_Date}&v=298398'
+    Branch_Buy_Sell_Data_URL = f'https://www.wantgoo.com/stock/{Stock_Name}/major-investors/branch-buysell-data?isOverBuy=true&m=Mjk4Mzk4'
     Temp_Data = crawler(Branch_Buy_Sell_Data_URL)
     Branch_Buy_Sell_Data = Temp_Data['data']
 
