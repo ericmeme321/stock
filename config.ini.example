@@ -1,0 +1,20 @@
+[DATABASE]
+host = localhost
+database = stock
+user = root
+password =
+port = 3306
+
+[CRAWLER]
+max_retries = 3
+timeout = 10
+sleep_min = 3
+sleep_max = 5
+
+[LOGGING]
+log_file = stock_crawler.log
+log_level = INFO
+
+[SCHEDULE]
+# 台股盤後資訊更新時間（24小時制）
+after_market_time = 14:30

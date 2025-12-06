@@ -1,28 +1,40 @@
 from often import *
 from requests_html import HTMLSession
 
-def Get_TWStock_Data(Stock_Name):
+def Get_TWStock_Data(Stock_Name, date=None):
+    """
+    獲取台股個股日成交資訊
+    Args:
+        Stock_Name: 股票代碼
+        date: 查詢日期(YYYYMMDD)，預設為最近交易日
+    Returns:
+        DataFrame 或 None
+    """
+    if date is None:
+        date = Get_Latest_Trading_Date()
+
     Now_Time = Get_Now()
-    # num = input('資料筆數 : ')
 
-    Stock_Data_URL = f'https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20210915&stockNo={Stock_Name}&_={Now_Time}'
-
+    Stock_Data_URL = f'https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date={date}&stockNo={Stock_Name}&_={Now_Time}'
 
     Stock_Data = crawler(Stock_Data_URL)
 
-
-    if Stock_Data['stat'] == 'OK':
-        print(Stock_Data['title'], Stock_Data['date'])
+    if Stock_Data and Stock_Data.get('stat') == 'OK':
+        print(f"[成功] {Stock_Data['title']} {Stock_Data['date']}")
 
         Stock_Df = pd.DataFrame(columns=Stock_Data['fields'])
         for data in Stock_Data['data']:
             Stock_Df_len = len(Stock_Df)
             Stock_Df.loc[Stock_Df_len] = data
-        
-        print(Stock_Df)
 
+        # 新增漲跌幅欄位（如果原本沒有）
+        if '漲跌幅' not in Stock_Df.columns and '漲跌價差' in Stock_Df.columns:
+            Stock_Df['漲跌幅'] = Stock_Df['漲跌價差']
+
+        print(Stock_Df)
         return Stock_Df
     else:
+        print(f"[錯誤] 無法取得 {Stock_Name} 的股票資料")
         return None
 
 def Get_Stock_LegalPerson(Stock_Name):

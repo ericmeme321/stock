@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 虛擬環境
+venv/
+env/
+ENV/
+
+# 日誌檔案
+logs/
+*.log
+
+# 資料檔案
+data/
+*.csv
+
+# 配置檔案（包含敏感資訊）
+config.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 系統檔案
+.DS_Store
+Thumbs.db
