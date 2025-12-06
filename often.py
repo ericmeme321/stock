@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from re import template
+# from re import template  # 未使用，已移除以相容 Python 3.13
 from bs4 import BeautifulSoup
 
 import datetime

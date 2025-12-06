@@ -1,5 +1,5 @@
 from often import *
-from requests_html import HTMLSession
+# HTMLSession 未使用，已移除以相容 Python 3.13
 
 def Get_TWStock_Data(Stock_Name, date=None):
     """

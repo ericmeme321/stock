@@ -1,5 +1,7 @@
 # 快速入門指南
 
+**✅ 已支援 Python 3.7 - 3.13**
+
 ## ❗ 遇到「什麼都沒顯示」的問題？
 
 如果執行 `python main.py` 沒有任何顯示，這是因為**缺少必要的 Python 套件**。
@@ -19,7 +21,7 @@ pip install -r requirements.txt
 ### 方法二：手動安裝
 
 ```bash
-pip install pandas numpy requests requests-html beautifulsoup4 lxml lxml_html_clean mysql-connector-python schedule
+pip install pandas numpy requests beautifulsoup4 lxml mysql-connector-python schedule
 ```
 
 ## ✅ 驗證安裝
